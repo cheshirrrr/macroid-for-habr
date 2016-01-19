@@ -2,15 +2,26 @@ package tutorial.macroidforhabr
 
 import android.app.Activity
 import android.os.Bundle
-import macroid.Contexts
+import android.widget.{Button, TextView, LinearLayout}
+import macroid.{Ui, Contexts}
+import macroid.FullDsl._
 
-/**
-  * Created by cheshirrrr on 09.01.2016.
-  */
 class MainActivity extends Activity with Contexts[Activity]{
 
-  override def onCreate(savedInstanceState: Bundle) = {
+  var textView = slot[TextView]
+
+  override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
+
+    val view = l[LinearLayout](
+      w[TextView] <~ text("Просто надпись") <~ wire(textView),
+      w[Button] <~ text("Нажми меня") <~ On.click(changeText)
+    ) <~ vertical
+
+    setContentView(getUi(view))
   }
 
+  def changeText : Ui[Any] = {
+    textView <~ text("Другая надпись")
+  }
 }
