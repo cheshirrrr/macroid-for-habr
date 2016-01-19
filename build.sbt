@@ -28,6 +28,7 @@ scalacOptions in (Compile, compile) ++=
 
 libraryDependencies ++= Seq(
   aar("org.macroid" %% "macroid" % "2.0.0-M4"),
+  aar("org.macroid" %% "macroid-viewable" % "2.0.0-M4"),
   "com.android.support" % "support-v4" % "23.1.1",
   compilerPlugin("org.brianmckenna" %% "wartremover" % "0.11")
 )
