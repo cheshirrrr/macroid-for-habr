@@ -49,6 +49,10 @@ class MainActivity extends FragmentActivity with Contexts[FragmentActivity]  wit
     tweakerOne ! TweakerActor.SetTweaked(tweakerTwo)
   }
 
+  override def onDestroy() = {
+    actorSystem.shutdown()
+  }
+
   def changeTextAndShowFragment : Ui[Any] = {
     (textView <~ text("Помигаем?")) ~ (layout <~~ flashElement) ~~ (textView <~ text("Ну и хватит")) ~~ replaceListableWithSlotted
   }
